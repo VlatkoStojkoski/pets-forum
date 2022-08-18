@@ -1,5 +1,3 @@
-import React, { FC } from 'react';
-
 import {
 	FormErrorMessage,
 	FormControl,
@@ -8,9 +6,10 @@ import {
 	InputGroup,
 	InputLeftAddon,
 	InputRightAddon,
-	InputAddonProps,
+	InputAddonProps
 } from '@chakra-ui/react';
 import { Field as FormikField, FieldProps } from 'formik';
+import React from 'react';
 
 export interface InputFieldProps {
 	label: string;
@@ -23,7 +22,9 @@ export interface InputFieldProps {
 	isFieldRequired?: boolean;
 }
 
-const InputField: FC<InputFieldProps> = ({
+const defaultValidate = (value: string) => (!value && 'Ова поле е задолжително') || null;
+
+const InputField: React.FC<InputFieldProps> = ({
 	name,
 	label,
 	leftAddon,
@@ -32,11 +33,13 @@ const InputField: FC<InputFieldProps> = ({
 	isFieldRequired,
 	...props
 }) => {
-	if (!validate && isFieldRequired)
-		validate = (value: string) => (!value && 'Ова поле е задолжително') || null;
-
 	return (
-		<FormikField name={name} validate={validate} isRequired>
+		<FormikField
+			name={name}
+			{...{
+				validate: !validate && isFieldRequired ? defaultValidate : validate,
+			}}
+		>
 			{({ field, form }: FieldProps) => (
 				<FormControl
 					isInvalid={!!form.errors[name] && !!form.touched[name]}
@@ -54,10 +57,10 @@ const InputField: FC<InputFieldProps> = ({
 						<Input id={name} {...field} {...props} />
 					)}
 
-					<FormErrorMessage>{form.errors[name]}</FormErrorMessage>
+					<FormErrorMessage>{form.errors[name]?.toString()}</FormErrorMessage>
 				</FormControl>
 			)}
-		</FormikField>
+		</FormikField >
 	);
 };
 

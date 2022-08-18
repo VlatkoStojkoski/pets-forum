@@ -1,4 +1,3 @@
-import React, { FC, ReactNode } from 'react';
 
 import { ChevronDownIcon, ChevronUpIcon } from '@chakra-ui/icons';
 import {
@@ -8,8 +7,9 @@ import {
 	IconButton,
 	useDisclosure,
 	Collapse,
-	CollapseProps,
+	CollapseProps
 } from '@chakra-ui/react';
+import React, { FC, ReactNode } from 'react';
 
 export interface SectionProps extends CollapseProps {
 	title: string;

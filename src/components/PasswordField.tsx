@@ -1,4 +1,3 @@
-import React, { FC, useState } from 'react';
 
 import { ViewIcon, ViewOffIcon } from '@chakra-ui/icons';
 import {
@@ -8,9 +7,10 @@ import {
 	Input,
 	InputGroup,
 	InputRightElement,
-	IconButton,
+	IconButton
 } from '@chakra-ui/react';
 import { Field, FieldProps } from 'formik';
+import React, { FC, useState } from 'react';
 
 const PasswordField: FC = () => {
 	const [showPassword, setShowPassword] = useState(false);
