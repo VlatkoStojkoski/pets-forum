@@ -1,5 +1,5 @@
-import { Grid, Stack, Text } from '@chakra-ui/react';
-import Link from 'next/link';
+import { Grid, Link, Stack, Text } from '@chakra-ui/react';
+import NextLink from 'next/link';
 
 import { NeuContainer } from '../../components';
 import { LightningBolt, Poison, PawEmergency, Rocket, Person } from '../../components/icons';
@@ -51,11 +51,11 @@ export const QuickAccess = () => {
 						zIndex={1}
 						key={iconI}
 					>
-						<Link href={url}>
-							<>
+						<NextLink href={url}>
+							<Link>
 								<Icon boxSize='100%' color={color} px={4} />
-							</>
-						</Link>
+							</Link>
+						</NextLink>
 						<Text textAlign='center' fontSize='sm' wordBreak='keep-all'>
 							{title}
 						</Text>

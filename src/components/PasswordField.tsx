@@ -12,7 +12,7 @@ import {
 import { Field, FieldProps } from 'formik';
 import React, { FC, useState } from 'react';
 
-const PasswordField: FC = () => {
+const PasswordField: React.FC = () => {
 	const [showPassword, setShowPassword] = useState(false);
 
 	const passwordValidate = (value: string) =>

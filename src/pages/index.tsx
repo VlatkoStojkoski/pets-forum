@@ -1,8 +1,8 @@
 import type { NextPage } from 'next';
 
-import { Center, Button, Stack, Heading, Text, Box } from '@chakra-ui/react';
+import { Center, Button, Stack, Heading, Text, Box, Link } from '@chakra-ui/react';
 import Head from 'next/head';
-import Link from 'next/link';
+import NextLink from 'next/link';
 
 import { Dog, Magnifier } from '../components/icons';
 import { trpc } from '../utils/trpc';
@@ -16,7 +16,7 @@ const Home: NextPage = () => {
 	return (
 		<>
 			<Head>
-				<title>🐶 Pets Forum</title>
+				<title>Pets Forum</title>
 			</Head>
 
 			<Center flexDirection='column' py={7} mx='auto' w='100%' textAlign='center'>
@@ -43,11 +43,13 @@ const Home: NextPage = () => {
 					</Text>
 				</Stack>
 				<Stack gridGap={5} w='clamp(12ch, 10ch, 20ch)' alignItems='center'>
-					<Link href='/users/signup'>
-						<Button colorScheme='accent' size='xl' rounded='2xl'>
-							Започнете
-						</Button>
-					</Link>
+					<NextLink href='/users/signup'>
+						<Link>
+							<Button colorScheme='accent' size='xl' rounded='2xl'>
+								Започнете
+							</Button>
+						</Link>
+					</NextLink>
 					<Link href='/users/signin'>
 						<Button
 							size='xl'

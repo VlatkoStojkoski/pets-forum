@@ -16,7 +16,7 @@ export interface SectionProps extends CollapseProps {
 	icon: ReactNode;
 }
 
-export const Section: FC<SectionProps> = ({
+export const Section: React.FC<SectionProps> = ({
 	title,
 	icon,
 	children,

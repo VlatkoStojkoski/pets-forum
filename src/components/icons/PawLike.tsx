@@ -1,8 +1,8 @@
 import { Icon, IconProps } from '@chakra-ui/react';
-import React, { FC } from 'react';
+import React from 'react';
 
 
-export const PawLike: FC<IconProps> = (props) => {
+export const PawLike: React.FC<IconProps> = (props) => {
 	return (
 		<Icon viewBox='0 0 15 13.006' {...props}>
 			<g id='paw_like' transform='translate(0.001 -0.5)'>

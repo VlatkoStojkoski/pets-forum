@@ -7,24 +7,28 @@ import {
 	Heading,
 	HStack,
 	IconButton,
+	Link,
 	Text,
 	VStack
 } from '@chakra-ui/react';
 import { Prisma } from '@prisma/client';
 import millify from 'millify';
-import Link from 'next/link';
+import NextLink from 'next/link';
 import React from 'react';
 
 import { PawLike } from '../components/icons';
 
+export const forumPostSelect = {
+	title: true,
+	author: true,
+	date: true,
+	content: true,
+	likes: true,
+	id: true,
+};
+
 export type ForumPostProperties = Prisma.ForumPostGetPayload<{
-	select: {
-		title: true;
-		author: true;
-		content: true;
-		likes: true;
-		id: true;
-	}
+	select: typeof forumPostSelect;
 }>
 
 export interface ForumPostProps extends BoxProps {
@@ -61,17 +65,19 @@ export const ForumPost: React.FC<ForumPostProps> = ({
 			{...props}
 		>
 			<HStack gridColumn='2/3' gridRow='1/2'>
-				<Link href={`/${username}`}>
-					<Text
-						my='auto'
-						w='max-content'
-						noOfLines={3}
-						maxW={['14ch', '15ch', '100%']}
-						fontWeight='550'
-					>
-						{displayName}
-					</Text>
-				</Link>
+				<NextLink href={`/${username}`} passHref>
+					<Link>
+						<Text
+							my='auto'
+							w='max-content'
+							noOfLines={3}
+							maxW={['14ch', '15ch', '100%']}
+							fontWeight='550'
+						>
+							{displayName}
+						</Text>
+					</Link>
+				</NextLink>
 				<SmallAddIcon bg='brand.800' color='bg' rounded='50%' my='auto' />
 			</HStack>
 			<Avatar
@@ -139,7 +145,10 @@ export const ForumPost: React.FC<ForumPostProps> = ({
 					fontWeight='600'
 					placeSelf='center'
 				>
-					<Link href={`/forum/posts/${id}`}>
+					<Link href={`/forum/${id}`} _hover={{
+						textDecor: 'underline',
+						textDecorationColor: 'brand__brown.300',
+					}}>
 						<HStack>
 							<ChatIcon boxSize='16px' />
 							<Text>Коментари</Text>

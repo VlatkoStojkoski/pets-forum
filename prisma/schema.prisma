@@ -40,7 +40,7 @@ model ForumComment {
   likes    Int
   author   Author   @relation(fields: [authorId], references: [id])
   authorId String   @db.ObjectId
-  date     DateTime
+  date     DateTime @default(now())
   content  String
 }
 
@@ -56,7 +56,7 @@ model ForumPost {
   likes    Int
   author   Author        @relation(fields: [authorId], references: [id])
   authorId String        @db.ObjectId
-  date     DateTime
+  date     DateTime      @default(now())
   type     ForumPostType
   keywords String[]
   content  String

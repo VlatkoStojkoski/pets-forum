@@ -1,8 +1,8 @@
 import { Icon, IconProps } from '@chakra-ui/react';
-import React, { FC } from 'react';
+import React from 'react';
 
 
-export const LightningBolt: FC<IconProps> = (props) => {
+export const LightningBolt: React.FC<IconProps> = (props) => {
 	return (
 		<Icon viewBox='0 0 12.581 22.365' {...props}>
 			<g id='lightning-bolt' transform='translate(-105.929)'>

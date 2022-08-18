@@ -1,5 +1,5 @@
-import { Flex, Heading } from '@chakra-ui/react';
-import Link from 'next/link';
+import { Flex, Heading, HStack, Link } from '@chakra-ui/react';
+import NextLink from 'next/link';
 
 import { Brand } from './icons';
 
@@ -16,14 +16,23 @@ const NavigationBar = () => {
 			zIndex={9999}
 			sx={{ backdropFilter: 'blur(15px)' }}
 		>
-			<Link href='/' style={{ display: 'inline-block' }}>
-				<Flex alignItems='center' gridColumnGap={2.5} w='fit-content'>
-					<Brand boxSize='36px' />
-					<Heading fontSize='xl' color='brand__brown.900'>
-						Pets UI
-					</Heading>
-				</Flex>
-			</Link>
+			<NextLink href='/' passHref>
+				<Link display='inline-block' _hover={{ textDecor: 'none' }} minW='fit-content'>
+					<Flex alignItems='center' gridColumnGap={2.5} w='fit-content'>
+						<Brand boxSize='36px' />
+						<Heading fontSize='xl' color='brand__brown.900'>
+							Pets Forum
+						</Heading>
+					</Flex>
+				</Link>
+			</NextLink>
+			<HStack flexDirection='row-reverse' w='100%'>
+				<NextLink href='/dashboard' passHref>
+					<Link display='inline-block' _hover={{ textDecor: 'none' }}>
+						Dashboard
+					</Link>
+				</NextLink>
+			</HStack>
 		</Flex>
 	);
 };

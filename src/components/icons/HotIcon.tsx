@@ -1,8 +1,8 @@
 import { Icon, IconProps } from '@chakra-ui/react';
-import React, { FC } from 'react';
+import React from 'react';
 
 
-export const HotIcon: FC<IconProps> = (props) => {
+export const HotIcon: React.FC<IconProps> = (props) => {
 	return (
 		<Icon viewBox='0 0 18 18' {...props}>
 			<path

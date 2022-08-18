@@ -1,8 +1,8 @@
 import { Icon, IconProps } from '@chakra-ui/react';
-import React, { FC } from 'react';
+import React from 'react';
 
 
-export const Google: FC<IconProps> = (props) => {
+export const Google: React.FC<IconProps> = (props) => {
 	return (
 		<Icon viewBox='0 0 256 262' {...props}>
 			<path

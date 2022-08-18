@@ -1,8 +1,8 @@
 import { Icon, IconProps } from '@chakra-ui/react';
-import React, { FC } from 'react';
+import React from 'react';
 
 
-export const Brand: FC<IconProps> = (props) => {
+export const Brand: React.FC<IconProps> = (props) => {
 	return (
 		<Icon viewBox='0 0 512 512' {...props}>
 			<defs>

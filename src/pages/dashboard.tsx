@@ -2,9 +2,12 @@ import { InferGetServerSidePropsType, NextPage } from 'next';
 
 import { Box, Stack } from '@chakra-ui/react';
 
-import { HotPosts } from '../../components/dashboard/HotPosts';
-import { QuickAccess } from '../../components/dashboard/QuickAccess';
-import { WelcomeSection } from '../../components/dashboard/WelcomeSection';
+import { forumPostSelect } from '../components';
+import { HotPosts } from '../components/dashboard/HotPosts';
+import { QuickAccess } from '../components/dashboard/QuickAccess';
+import { WelcomeSection } from '../components/dashboard/WelcomeSection';
+import { prisma } from '../server/db/client';
+import { getPreviousDay } from '../utils/tools';
 
 const Dashboard: NextPage<InferGetServerSidePropsType<typeof getServerSideProps>> = ({
 	posts,
@@ -25,22 +28,21 @@ const Dashboard: NextPage<InferGetServerSidePropsType<typeof getServerSideProps>
 };
 
 export const getServerSideProps = async () => {
+	const currDateTime = new Date();
+
 	const posts = await prisma?.forumPost.findMany({
-		select: {
-			title: true,
-			author: true,
-			content: true,
-			likes: true,
-			id: true,
-		},
+		take: 2,
+		select: forumPostSelect,
 		orderBy: [
 			{
 				likes: 'desc',
 			},
-			{
-				date: 'desc',
-			},
 		],
+		where: {
+			date: {
+				gte: getPreviousDay(currDateTime),
+			},
+		},
 	});
 
 	return {

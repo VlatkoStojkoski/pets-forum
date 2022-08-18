@@ -1,5 +1,5 @@
 // src/pages/_app.tsx
-import { ChakraProvider } from '@chakra-ui/react';
+import { Box, ChakraProvider } from '@chakra-ui/react';
 import { ColorModeScript } from '@chakra-ui/react';
 import { withTRPC } from '@trpc/next';
 import { SessionProvider } from 'next-auth/react';
@@ -18,8 +18,12 @@ const MyApp: AppType = ({
 		<SessionProvider session={session}>
 			<ChakraProvider theme={theme}>
 				<ColorModeScript initialColorMode={theme.config.initialColorMode} />
-				<NavigationBar />
-				<Component {...pageProps} />
+				<Box bg='bg' minH='100vh' minW='100%'>
+					<NavigationBar />
+					<Box py='5'>
+						<Component {...pageProps} />
+					</Box>
+				</Box>
 			</ChakraProvider>
 		</SessionProvider>
 	);

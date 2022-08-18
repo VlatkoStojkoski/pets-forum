@@ -1,8 +1,8 @@
 import { Icon, IconProps } from '@chakra-ui/react';
-import React, { FC } from 'react';
+import React from 'react';
 
 
-export const NewsFeed: FC<IconProps> = (props) => {
+export const NewsFeed: React.FC<IconProps> = (props) => {
 	return (
 		<Icon viewBox='0 0 26.365 26.365' {...props}>
 			<g id='news_feed' transform='translate(0)'>

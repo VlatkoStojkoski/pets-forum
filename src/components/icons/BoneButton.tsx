@@ -1,8 +1,8 @@
 import { Icon, IconProps } from '@chakra-ui/react';
-import React, { FC } from 'react';
+import React from 'react';
 
 
-export const BoneButton: FC<IconProps> = (props) => {
+export const BoneButton: React.FC<IconProps> = (props) => {
 	return (
 		<Icon viewBox='0 0 61 61' {...props}>
 			<g id='Button' transform='translate(-42 -182)'>

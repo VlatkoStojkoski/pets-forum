@@ -5,23 +5,26 @@ import {
 	Grid,
 	HStack,
 	IconButton,
+	Link,
 	Text,
 	VStack
 } from '@chakra-ui/react';
 import { Prisma } from '@prisma/client';
 import millify from 'millify';
-import Link from 'next/link';
+import NextLink from 'next/link';
 import React from 'react';
 
 import { PawLike } from '../components/icons';
 
+export const forumCommentSelect = {
+	author: true,
+	content: true,
+	likes: true,
+	id: true,
+};
+
 export type ForumCommentProperties = Prisma.ForumCommentGetPayload<{
-	select: {
-		author: true;
-		content: true;
-		likes: true;
-		id: true;
-	}
+	select: typeof forumCommentSelect;
 }>
 
 export interface ForumCommentProps extends BoxProps {
@@ -53,17 +56,19 @@ export const ForumComment: React.FC<ForumCommentProps> = ({
 			{...props}
 		>
 			<HStack gridColumn='2/3' gridRow='1/2'>
-				<Link href={`/${username}`}>
-					<Text
-						my='auto'
-						w='max-content'
-						noOfLines={1}
-						maxW={['14ch', '15ch', '100%']}
-						fontWeight='550'
-					>
-						{displayName}
-					</Text>
-				</Link>
+				<NextLink href={`/${username}`} passHref>
+					<Link>
+						<Text
+							my='auto'
+							w='max-content'
+							noOfLines={1}
+							maxW={['14ch', '15ch', '100%']}
+							fontWeight='550'
+						>
+							{displayName}
+						</Text>
+					</Link>
+				</NextLink>
 				<SmallAddIcon bg='brand.800' color='bg' rounded='50%' my='auto' />
 			</HStack>
 			<Avatar
