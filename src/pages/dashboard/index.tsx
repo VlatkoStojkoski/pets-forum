@@ -2,9 +2,9 @@ import { InferGetServerSidePropsType, NextPage } from 'next';
 
 import { Box, Stack } from '@chakra-ui/react';
 
-import { HotPosts } from './HotPosts';
-import { QuickAccess } from './QuickAccess';
-import { WelcomeSection } from './WelcomeSection';
+import { HotPosts } from '../../components/dashboard/HotPosts';
+import { QuickAccess } from '../../components/dashboard/QuickAccess';
+import { WelcomeSection } from '../../components/dashboard/WelcomeSection';
 
 const Dashboard: NextPage<InferGetServerSidePropsType<typeof getServerSideProps>> = ({
 	posts,

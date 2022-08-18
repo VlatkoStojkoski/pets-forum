@@ -4,8 +4,8 @@ import { Button, VStack } from '@chakra-ui/react';
 import Link from 'next/link';
 import React from 'react';
 
-import { ForumPostProperties, ForumPosts } from '../../components';
-import { HotIcon } from '../../components/icons';
+import { ForumPostProperties, ForumPosts } from '..';
+import { HotIcon } from '../icons';
 
 import { Section } from './Section';
 
