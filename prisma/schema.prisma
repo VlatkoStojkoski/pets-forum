@@ -31,17 +31,19 @@ model Author {
   displayName  String
   username     String
   avatar       String
-  ForumComment ForumComment[]
   ForumPost    ForumPost[]
+  ForumComment ForumComment[]
 }
 
 model ForumComment {
-  id       String   @id @default(auto()) @map("_id") @db.ObjectId
-  likes    Int
-  author   Author   @relation(fields: [authorId], references: [id])
-  authorId String   @db.ObjectId
-  date     DateTime @default(now())
-  content  String
+  id          String    @id @default(auto()) @map("_id") @db.ObjectId
+  likes       Int
+  author      Author    @relation(fields: [authorId], references: [id])
+  authorId    String    @db.ObjectId
+  date        DateTime  @default(now())
+  content     String
+  forumPost   ForumPost @relation(fields: [forumPostId], references: [id])
+  forumPostId String    @db.ObjectId
 }
 
 enum ForumPostType {
@@ -51,12 +53,13 @@ enum ForumPostType {
 }
 
 model ForumPost {
-  id       String        @id @default(auto()) @map("_id") @db.ObjectId
+  id       String         @id @default(auto()) @map("_id") @db.ObjectId
   title    String
   likes    Int
-  author   Author        @relation(fields: [authorId], references: [id])
-  authorId String        @db.ObjectId
-  date     DateTime      @default(now())
+  comments ForumComment[]
+  author   Author         @relation(fields: [authorId], references: [id])
+  authorId String         @db.ObjectId
+  date     DateTime       @default(now())
   type     ForumPostType
   keywords String[]
   content  String

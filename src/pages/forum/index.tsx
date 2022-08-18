@@ -1,6 +1,7 @@
 import type { InferGetServerSidePropsType, NextPage } from 'next';
 
 import { Heading, VStack } from '@chakra-ui/react';
+import Head from 'next/head';
 
 import { ForumPosts, forumPostSelect } from '../../components';
 
@@ -9,6 +10,10 @@ const Forum: NextPage<InferGetServerSidePropsType<typeof getServerSideProps>> = 
 }) => {
 	return (
 		<>
+			<Head>
+				<title>Pets Forum | Forum</title>
+			</Head>
+
 			<Heading textAlign='center' fontSize='6xl' mb={6}>
 				Форум
 			</Heading>

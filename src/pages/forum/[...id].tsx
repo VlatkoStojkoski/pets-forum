@@ -1,8 +1,10 @@
 import type { GetServerSideProps, InferGetServerSidePropsType, NextPage } from 'next';
 
-import { Grid, Heading, VStack } from '@chakra-ui/react';
+import { Grid, VStack } from '@chakra-ui/react';
+import Head from 'next/head';
 
 import { ForumCommentProperties, ForumComments, forumCommentSelect, ForumPost, ForumPostProperties, forumPostSelect } from '../../components';
+import { prisma } from '../../server/db/client';
 import { useLikeableState } from '../../utils/hooks';
 
 const Forum: NextPage<InferGetServerSidePropsType<typeof getServerSideProps>> = ({
@@ -12,23 +14,32 @@ const Forum: NextPage<InferGetServerSidePropsType<typeof getServerSideProps>> = 
 	const { handleLike, checkLiked } = useLikeableState();
 
 	return (
-		<Grid px={7} maxW='700px' mx='auto'>
-			{post && (
-				<ForumPost
-					config={post}
-					showComments={false}
-					showAll={true}
-					onLike={handleLike}
-					liked={checkLiked(post.id)}
-					mb={8}
-				/>
-			)}
-			{comments && (
-				<VStack gridRowGap={3}>
-					<ForumComments comments={comments} />
-				</VStack>
-			)}
-		</Grid>
+		<>
+			<Head>
+				<title>Pets Forum | {post?.title || 'Forum post'}</title>
+				<meta name="og:title" content={post?.title || 'Forum post'} />
+				<meta name="description" content={post?.content || 'Forum post content'} />
+				<meta name="og:description" content={post?.content || 'Forum post content'} />
+			</Head>
+
+			<Grid px={7} maxW='700px' mx='auto'>
+				{post && (
+					<ForumPost
+						config={post}
+						showComments={false}
+						showAll={true}
+						onLike={handleLike}
+						liked={checkLiked(post.id)}
+						mb={8}
+					/>
+				)}
+				{comments && (
+					<VStack gridRowGap={3}>
+						<ForumComments comments={comments} />
+					</VStack>
+				)}
+			</Grid>
+		</>
 	);
 };
 
@@ -47,16 +58,18 @@ export const getServerSideProps: GetServerSideProps<ServerSideProps, { id: [stri
 				},
 			};
 
+		const postId = params?.id[0];
+
 		let post = await prisma?.forumPost.findFirst({
 			where: {
-				id: params?.id[0],
+				id: postId,
 			},
 			select: forumPostSelect,
 		}) || null;
 
 		let comments = await prisma?.forumComment.findMany({
 			where: {
-				id: params?.id[0],
+				forumPostId: postId,
 			},
 			select: forumCommentSelect,
 			orderBy: {
