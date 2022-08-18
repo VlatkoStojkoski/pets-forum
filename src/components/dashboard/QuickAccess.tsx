@@ -51,7 +51,7 @@ export const QuickAccess = () => {
 						zIndex={1}
 						key={iconI}
 					>
-						<NextLink href={url}>
+						<NextLink href={url} passHref>
 							<Link>
 								<Icon boxSize='100%' color={color} px={4} />
 							</Link>

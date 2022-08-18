@@ -43,7 +43,7 @@ const Home: NextPage = () => {
 					</Text>
 				</Stack>
 				<Stack gridGap={5} w='clamp(12ch, 10ch, 20ch)' alignItems='center'>
-					<NextLink href='/users/signup'>
+					<NextLink href='/users/signup' passHref>
 						<Link>
 							<Button colorScheme='accent' size='xl' rounded='2xl'>
 								Започнете
