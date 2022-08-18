@@ -44,7 +44,7 @@ const PasswordField: FC = () => {
 							/>
 						</InputRightElement>
 					</InputGroup>
-					<FormErrorMessage>{form.errors.password}</FormErrorMessage>
+					<FormErrorMessage>{form.errors.password?.toString()}</FormErrorMessage>
 				</FormControl>
 			)}
 		</Field>
