@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from 'react';
 
+import { ForumPostProperties } from '../server/router/forumPost';
 import { useLikeableState } from '../utils/hooks';
-
-import { ForumPostProperties } from './ForumPost';
 
 import { ForumPost } from './index';
 

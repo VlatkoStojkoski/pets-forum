@@ -36,6 +36,10 @@ export const forumPost = createRouter()
 			batchSize: z.number().optional(),
 		}).optional(),
 		async resolve({ ctx, input }) {
+			const asyncTimeout = (ms: number) => new Promise((res, rej) => setTimeout(() => res(true), ms));
+
+			await asyncTimeout(3000);
+
 			return await ctx.prisma.forumPost.findMany({
 				take: input?.batchSize || 2,
 				select: forumPostSelect,

@@ -1,12 +1,13 @@
 import { InferGetServerSidePropsType } from 'next';
 
-import { Button, Link, Skeleton, SkeletonCircle, VStack } from '@chakra-ui/react';
+import { SmallAddIcon } from '@chakra-ui/icons';
+import { Box, Button, Grid, HStack, IconButton, Link, Skeleton, SkeletonCircle, VStack, Text } from '@chakra-ui/react';
 import NextLink from 'next/link';
 import React from 'react';
 
 import { ForumPosts } from '..';
 import { trpc } from '../../utils/trpc';
-import { HotIcon } from '../icons';
+import { HotIcon, PawLike } from '../icons';
 
 import { Section } from './Section';
 
@@ -20,16 +21,41 @@ export const HotPosts: React.FC = () => {
 	return (
 		<Section title='Најжешки теми' icon={<HotIcon boxSize='32px' />}>
 			<VStack gridRowGap={3}>
-				<Skeleton
-					height='40px'
-					isLoaded={!isPostsLoading}
-					bg='green.500'
-					color='white'
-					fadeDuration={1}
-				/>
 				{!isPostsLoading && posts !== undefined ?
 					<ForumPosts posts={posts} /> :
-					null
+					<Grid
+						templateColumns='max-content auto'
+						templateRows='max-content minmax(100px, auto) auto'
+						w='full'
+						bg='brand.150'
+						padding={3}
+						rounded='lg'
+						columnGap={3}>
+						<HStack gridColumn='2/3' gridRow='1/2'>
+							<Skeleton
+								height='1em'
+								width='7ch' />
+						</HStack>
+						<SkeletonCircle size='8' />
+						<Grid placeSelf='center' placeItems='center' rowGap={2}>
+							<Skeleton
+								height='1em'
+								width='3ch' />
+							<Skeleton
+								height='1.5em'
+								width='3ch' />
+						</Grid>
+						<VStack gridColumn='2/3' gridRow='2/3' alignItems='normal'>
+							<Skeleton
+								height='1.5em'
+								width='full' />
+							<Box pos='relative'>
+								<Skeleton
+									height='5em'
+									width='full' />
+							</Box>
+						</VStack>
+					</Grid>
 				}
 				<NextLink href='/forum' passHref>
 					<Link>

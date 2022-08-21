@@ -11,7 +11,6 @@ import {
 	Text,
 	VStack
 } from '@chakra-ui/react';
-import { Prisma } from '@prisma/client';
 import millify from 'millify';
 import NextLink from 'next/link';
 import React from 'react';
