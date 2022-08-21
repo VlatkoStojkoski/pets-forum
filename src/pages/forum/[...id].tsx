@@ -3,8 +3,9 @@ import type { GetServerSideProps, InferGetServerSidePropsType, NextPage } from '
 import { Grid, VStack } from '@chakra-ui/react';
 import Head from 'next/head';
 
-import { ForumCommentProperties, ForumComments, forumCommentSelect, ForumPost, ForumPostProperties, forumPostSelect } from '../../components';
+import { ForumCommentProperties, ForumComments, forumCommentSelect, ForumPost } from '../../components';
 import { prisma } from '../../server/db/client';
+import { ForumPostProperties, forumPostSelect } from '../../server/router/forumPost';
 import { useLikeableState } from '../../utils/hooks';
 
 const Forum: NextPage<InferGetServerSidePropsType<typeof getServerSideProps>> = ({
