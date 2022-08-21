@@ -17,19 +17,7 @@ import NextLink from 'next/link';
 import React from 'react';
 
 import { PawLike } from '../components/icons';
-
-export const forumPostSelect = {
-	title: true,
-	author: true,
-	date: true,
-	content: true,
-	likes: true,
-	id: true,
-};
-
-export type ForumPostProperties = Prisma.ForumPostGetPayload<{
-	select: typeof forumPostSelect;
-}>
+import { ForumPostProperties } from '../server/router/forumPost';
 
 export interface ForumPostProps extends BoxProps {
 	config: ForumPostProperties;
@@ -145,15 +133,17 @@ export const ForumPost: React.FC<ForumPostProps> = ({
 					fontWeight='600'
 					placeSelf='center'
 				>
-					<Link href={`/forum/${id}`} _hover={{
-						textDecor: 'underline',
-						textDecorationColor: 'brand__brown.300',
-					}}>
-						<HStack>
-							<ChatIcon boxSize='16px' />
-							<Text>Коментари</Text>
-						</HStack>
-					</Link>
+					<NextLink href={`/forum/${id}`} passHref>
+						<Link _hover={{
+							textDecor: 'underline',
+							textDecorationColor: 'brand__brown.300',
+						}} >
+							<HStack>
+								<ChatIcon boxSize='16px' />
+								<Text>Коментари</Text>
+							</HStack>
+						</Link>
+					</NextLink>
 				</Box>
 			)}
 		</Grid>

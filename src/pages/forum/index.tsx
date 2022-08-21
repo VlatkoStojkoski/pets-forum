@@ -3,7 +3,8 @@ import type { InferGetServerSidePropsType, NextPage } from 'next';
 import { Heading, VStack } from '@chakra-ui/react';
 import Head from 'next/head';
 
-import { ForumPosts, forumPostSelect } from '../../components';
+import { ForumPosts } from '../../components';
+import { forumPostSelect } from '../../server/router/forumPost';
 
 const Forum: NextPage<InferGetServerSidePropsType<typeof getServerSideProps>> = ({
 	posts,

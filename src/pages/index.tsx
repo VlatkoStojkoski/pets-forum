@@ -5,14 +5,8 @@ import Head from 'next/head';
 import NextLink from 'next/link';
 
 import { Dog, Magnifier } from '../components/icons';
-import { trpc } from '../utils/trpc';
 
 const Home: NextPage = () => {
-	const { data, isLoading } = trpc.useQuery([
-		'example.hello',
-		{ text: 'from tRPC' },
-	]);
-
 	return (
 		<>
 			<Head>
@@ -50,19 +44,21 @@ const Home: NextPage = () => {
 							</Button>
 						</Link>
 					</NextLink>
-					<Link href='/users/signin'>
-						<Button
-							size='xl'
-							rounded='2xl'
-							boxShadow={`
+					<NextLink href='/users/signin' passHref>
+						<Link>
+							<Button
+								size='xl'
+								rounded='2xl'
+								boxShadow={`
 							-15px 15px 25px 0 #f6cfa580,
 							15px -15px 25px 0 #ffffff
 						`}
-							bg='bg'
-						>
-							Логирај се
-						</Button>
-					</Link>
+								bg='bg'
+							>
+								Логирај се
+							</Button>
+						</Link>
+					</NextLink>
 				</Stack>
 			</Center>
 		</>

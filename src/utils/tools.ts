@@ -8,9 +8,5 @@ export function objectWithoutProperties(obj: { [key: string]: any }, keys: any[]
 	return target;
 };
 
-export function getPreviousDay(date = new Date()) {
-	const previous = new Date(date.getTime());
-	previous.setDate(date.getDate() - 1);
-
-	return previous;
-}
+export const getPreviousWeek = (date = new Date()) =>
+	new Date(date.getFullYear(), date.getMonth(), date.getDate() - 7);
