@@ -1,6 +1,7 @@
 import type { NextPage } from 'next';
 
 import { Center, Button, Stack, Heading, Text, Box, Link } from '@chakra-ui/react';
+import { signIn } from 'next-auth/react';
 import Head from 'next/head';
 import NextLink from 'next/link';
 
@@ -37,13 +38,13 @@ const Home: NextPage = () => {
 					</Text>
 				</Stack>
 				<Stack gridGap={5} w='clamp(12ch, 10ch, 20ch)' alignItems='center'>
-					<NextLink href='/users/signup' passHref>
-						<Link>
-							<Button colorScheme='accent' size='xl' rounded='2xl'>
-								Започнете
-							</Button>
-						</Link>
-					</NextLink>
+					{/* <NextLink href='/users/signup' passHref>
+						<Link> */}
+					<Button colorScheme='accent' size='xl' rounded='2xl' onClick={() => signIn()}>
+						Започнете
+					</Button>
+					{/* </Link>
+					</NextLink> */}
 					<NextLink href='/users/signin' passHref>
 						<Link>
 							<Button

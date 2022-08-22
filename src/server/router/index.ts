@@ -2,7 +2,6 @@
 import superjson from 'superjson';
 
 import { createRouter } from './context';
-import { exampleRouter } from './example';
 import { forumPost } from './forumPost';
 import { protectedExampleRouter } from './protected-example-router';
 
