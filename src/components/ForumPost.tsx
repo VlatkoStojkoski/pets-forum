@@ -3,17 +3,20 @@ import {
 	Avatar,
 	Box,
 	BoxProps,
-	Grid,
 	Heading,
-	HStack,
 	IconButton,
 	Link,
 	Text,
-	VStack
+	VStack,
+	Grid,
+	HStack,
+	Skeleton,
+	SkeletonCircle
 } from '@chakra-ui/react';
 import millify from 'millify';
 import NextLink from 'next/link';
 import React from 'react';
+
 
 import { PawLike } from '../components/icons';
 import { ForumPostProperties } from '../server/router/forumPost';
@@ -148,3 +151,39 @@ export const ForumPost: React.FC<ForumPostProps> = ({
 		</Grid>
 	);
 };
+
+export const ForumPostSkeleton: React.FC = () => (
+	<Grid
+		templateColumns='max-content auto'
+		templateRows='max-content minmax(100px, auto) auto'
+		w='full'
+		bg='brand.150'
+		padding={3}
+		rounded='lg'
+		columnGap={3}>
+		<HStack gridColumn='2/3' gridRow='1/2'>
+			<Skeleton
+				height='1em'
+				width='7ch' />
+		</HStack>
+		<SkeletonCircle size='8' />
+		<Grid placeSelf='center' placeItems='center' rowGap={2}>
+			<Skeleton
+				height='1em'
+				width='3ch' />
+			<Skeleton
+				height='1.5em'
+				width='3ch' />
+		</Grid>
+		<VStack gridColumn='2/3' gridRow='2/3' alignItems='normal'>
+			<Skeleton
+				height='1.5em'
+				width='full' />
+			<Box pos='relative'>
+				<Skeleton
+					height='5em'
+					width='full' />
+			</Box>
+		</VStack>
+	</Grid>
+);

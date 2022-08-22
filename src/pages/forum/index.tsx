@@ -1,14 +1,14 @@
-import type { InferGetServerSidePropsType, NextPage } from 'next';
+import type { NextPage } from 'next';
 
 import { Heading, VStack } from '@chakra-ui/react';
 import Head from 'next/head';
 
-import { ForumPosts } from '../../components';
-import { forumPostSelect } from '../../server/router/forumPost';
+import { ForumPosts, ForumPostSkeleton } from '../../components';
+import { trpc } from '../../utils/trpc';
 
-const Forum: NextPage<InferGetServerSidePropsType<typeof getServerSideProps>> = ({
-	posts,
-}) => {
+const Forum: NextPage = () => {
+	const { data: posts } = trpc.useQuery(['forumPost.getAll']);
+
 	return (
 		<>
 			<Head>
@@ -22,28 +22,11 @@ const Forum: NextPage<InferGetServerSidePropsType<typeof getServerSideProps>> = 
 				{
 					posts?.length ?
 						<ForumPosts posts={posts} /> :
-						<></>
+						[...Array(2)].map((_, i) => <ForumPostSkeleton key={i} />)
 				}
 			</VStack>
 		</>
 	);
-};
-
-export const getServerSideProps = async () => {
-	const posts = await prisma?.forumPost.findMany({
-		select: forumPostSelect,
-		orderBy: [
-			{
-				date: 'desc',
-			},
-		],
-	});
-
-	return {
-		props: {
-			posts,
-		},
-	};
 };
 
 export default Forum;
