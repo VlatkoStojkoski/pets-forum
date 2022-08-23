@@ -1,5 +1,3 @@
-import { InferGetServerSidePropsType, NextPage } from 'next';
-
 import { Box, Stack } from '@chakra-ui/react';
 import Head from 'next/head';
 
@@ -7,7 +5,9 @@ import { HotPosts } from '../components/dashboard/HotPosts';
 import { QuickAccess } from '../components/dashboard/QuickAccess';
 import { WelcomeSection } from '../components/dashboard/WelcomeSection';
 
-const Dashboard: NextPage = () => {
+import type { ProtectedNextPage } from './_app';
+
+const Dashboard: ProtectedNextPage = (props) => {
 	return (
 		<>
 			<Head>
@@ -23,5 +23,7 @@ const Dashboard: NextPage = () => {
 		</>
 	);
 };
+
+Dashboard.auth = true;
 
 export default Dashboard;

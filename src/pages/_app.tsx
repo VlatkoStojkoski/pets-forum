@@ -1,9 +1,12 @@
 // src/pages/_app.tsx
+import type { NextPage } from 'next';
+
 import { Box, ChakraProvider } from '@chakra-ui/react';
 import { ColorModeScript } from '@chakra-ui/react';
 import { withTRPC } from '@trpc/next';
-import { SessionProvider } from 'next-auth/react';
-import type { AppType } from 'next/dist/shared/lib/utils';
+import { SessionProvider, signIn, useSession } from 'next-auth/react';
+import type { AppType, NextComponentType } from 'next/dist/shared/lib/utils';
+import React from 'react';
 import superjson from 'superjson';
 
 import NavigationBar from '../components/NavigationBar';
@@ -14,20 +17,48 @@ const MyApp: AppType = ({
 	Component,
 	pageProps: { session, ...pageProps },
 }) => {
+	const FullComponent = () =>
+		<ChakraProvider theme={theme}>
+			<ColorModeScript initialColorMode={theme.config.initialColorMode} />
+			<Box bg='bg' minH='100vh' minW='100%'>
+				<NavigationBar />
+				<Box py='5'>
+					<Component {...pageProps} />
+				</Box>
+			</Box>
+		</ChakraProvider>;
+
 	return (
 		<SessionProvider session={session}>
-			<ChakraProvider theme={theme}>
-				<ColorModeScript initialColorMode={theme.config.initialColorMode} />
-				<Box bg='bg' minH='100vh' minW='100%'>
-					<NavigationBar />
-					<Box py='5'>
-						<Component {...pageProps} />
-					</Box>
-				</Box>
-			</ChakraProvider>
+			{(Component as NextComponentType & { auth: boolean }).auth ? (
+				<Auth>
+					<FullComponent />
+				</Auth>
+			) : (
+				<FullComponent />
+			)}
 		</SessionProvider>
 	);
 };
+
+const Auth: React.FC<{ children: JSX.Element }> = ({ children }) => {
+	const { data: session, status } = useSession();
+	const isUser = !!session?.user;
+	React.useEffect(() => {
+		if (status === 'loading') return;
+		if (!isUser) signIn();
+	}, [isUser, status]);
+
+	if (isUser) {
+		return children;
+	}
+
+	// Session is being fetched, or no user.
+	// If no user, useEffect() will redirect.
+	return <></>;
+};
+
+export type ProtectedNextPage = NextPage & { auth: true };
 
 const getBaseUrl = () => {
 	if (typeof window !== undefined) return ''; // browser should use relative url

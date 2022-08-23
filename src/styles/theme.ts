@@ -61,8 +61,17 @@ export default extendTheme({
 	},
 	components: {
 		Button: {
-			baseStyle: {
-				fontWeight: 'bold',
+			defaultProps: {
+				colorScheme: 'brand__brown',
+			},
+			variants: {
+				neu: {
+					boxShadow: `
+						-15px 15px 25px 0 #f6cfa580,
+						15px -15px 25px 0 #ffffff
+					`,
+					bg: 'bg',
+				},
 			},
 			sizes: {
 				xl: {

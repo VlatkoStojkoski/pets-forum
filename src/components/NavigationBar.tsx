@@ -1,11 +1,18 @@
-import { Flex, Heading, HStack, Link } from '@chakra-ui/react';
+import { ChevronDownIcon } from '@chakra-ui/icons';
+import { Button, Flex, Grid, Heading, HStack, Link, Menu, MenuButton, MenuItem, MenuList } from '@chakra-ui/react';
+import { signIn, signOut } from 'next-auth/react';
 import NextLink from 'next/link';
+import { useRouter } from 'next/router';
 
 import { Brand } from './icons';
 
 const NavigationBar = () => {
+	const router = useRouter();
+
 	return (
-		<Flex
+		<Grid
+			templateColumns='auto auto'
+			justifyContent='space-between'
 			px={7}
 			py={3}
 			top={0}
@@ -26,14 +33,23 @@ const NavigationBar = () => {
 					</Flex>
 				</Link>
 			</NextLink>
-			<HStack flexDirection='row-reverse' w='100%'>
-				<NextLink href='/dashboard' passHref>
-					<Link display='inline-block' _hover={{ textDecor: 'none' }}>
+			<Menu>
+				<MenuButton as={Button} rightIcon={<ChevronDownIcon />}>
+					Developer menu
+				</MenuButton>
+				<MenuList>
+					<MenuItem onClick={() => router.push('/dashboard')}>
 						Dashboard
-					</Link>
-				</NextLink>
-			</HStack>
-		</Flex>
+					</MenuItem>
+					<MenuItem onClick={() => signIn()}>
+						Sign in
+					</MenuItem>
+					<MenuItem onClick={() => signOut()}>
+						Sign out
+					</MenuItem>
+				</MenuList>
+			</Menu>
+		</Grid>
 	);
 };
 
